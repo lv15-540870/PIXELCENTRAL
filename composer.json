@@ -1,0 +1,12 @@
+{
+    "name": "pixelcentral/tienda",
+    "description": "Tienda online Pixel Central para venta de videojuegos",
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "require": {
+        "setasign/fpdf": "^1.8",
+        "paypal/rest-api-sdk-php": "^1.14",
+        "dompdf/dompdf": "^3.1"
+    }
+}

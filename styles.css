@@ -1,0 +1,1098 @@
+:root { /*--COLORES A USAR EN NUESTRA PAGINA--*/
+--blanco: #ffffff;
+--azul: #0033cc;
+--rojo: #cc0000;
+--verde: #008f39;
+--oscuro: #111;
+--grisClaro: #222;
+--rojoBoton: #cc1414;
+--rojoBotonHover: #a30f0f;
+--amarilloBoton: #ffcc00;
+--amarilloBotonHover: #e6b800;
+--colorSlider: #444;
+}
+
+/*--GLOBAL--*/
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Krub', sans-serif;
+    color: var(--blanco);
+    background: radial-gradient(circle at top, #0b0b33 0%, #000010 80%);
+}
+
+/*--HEADER--*/
+.titulo {
+    text-align: center;
+    font-size: 3.5rem;
+    margin-top: 1rem;
+}
+
+.titulo span {
+    display: block;
+    font-size: 1.8rem;
+    color: #ccc;
+}
+
+.navegacion-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #000;
+}
+
+.navegacion-principal a {
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 1.2rem 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.navegacion-principal a:hover {
+    background-color: #333;
+    color: var(--blanco);
+}
+
+/*--BANNER--*/
+.banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.banner-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    text-shadow: 2px 2px 10px #000;
+    text-align: center;
+}
+
+/*--SLIDER GENERAL--*/
+.slider {
+    margin: 4rem auto;
+    max-width: 120rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgb(0, 0, 0); /* Sombra para dar efecto de elevación */
+}
+
+/*Centrado al texto que se encuentra dentro del encabezado*/
+.slider-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.slider-header h2 {
+    font-size: 2.8rem;
+    text-transform: uppercase; /*Convierte todo el texto en mayusculas*/
+    margin-bottom: 1rem;
+}
+
+.slider-header p {
+    font-size: 1.6rem;
+    color: #f5f5f5;
+}
+
+/*Contenedor de las tarjetas del slider */
+.slider-contenido {
+    display: flex; /* Coloca las tarjetas una al lado de otra en fila lo que nos permite mostrar más titulos*/
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory; /* Hace que el slider se mueva por el eje x de la pagina y se alinee por cada tarjeta */
+    padding-bottom: 1rem;
+}
+
+/* Personalización de la barra de desplazamiento (solo visible en navegadores basados en WebKit como Chrome o Edge) */
+.slider-contenido::-webkit-scrollbar {
+    height: 8px; 
+}
+
+/* Estilizado de la parte móvil del scroll */
+.slider-contenido::-webkit-scrollbar-thumb {
+    background-color: var(--colorSlider); /* Color gris oscuro del scroll */
+    border-radius: 4px;
+}
+
+/*--TARJETAS--*/
+.card {
+    min-width: 250px;
+    background-color: #1c1c1c;
+    color: var(--blanco);
+    border-radius: 1rem;
+    text-align: center;
+    padding: 1rem;
+    flex: 0 0 auto;
+    scroll-snap-align: start; /* Hace que el scroll horizontal “encaje” al inicio de cada tarjeta */
+    transition: transform 0.3s ease; /* Suaviza la animación cuando cambia el tamaño al hacer hover */
+}
+
+/*Al tener nuestro cursor encima de cada tarjeta sucedera una "animacion" de ser seleccionado*/
+.card:hover {
+    transform: scale(1.03); /* Aumenta ligeramente el tamaño (3%) al pasar el cursor */
+}
+
+/* Imagen dentro de cada tarjeta */
+.card img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain; /* Escala la imagen sin recortarla (mantiene todo visible) */
+    background-color: var(--oscuro); /*Si la imagen no abarca todo, se pone un fondo negro*/
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Título del juego o producto, su tamaño y color*/
+.card h3 {
+    font-size: 1.8rem;
+    color: var(--blanco); 
+}
+
+/*El apartado del precio, su color, su tamaño y separacion y su fuente en negrita*/
+.precio {
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+/*--BOTONES--*/
+.boton {
+    display: inline-block; /*Hace que el botón se comporte como un bloque en línea (permite ajustar ancho/alto)*/
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer; /*Cambia la flecha del cursor por una mano al estar encima del boton*/
+    font-size: 1.6rem;
+}
+
+/*Efecto Hover del boton al tener el cursor encima de este*/
+.boton:hover {
+    filter: brightness(1.2); /*Animacion al seleccionar el boton con el cursor, aumentando el brillo de manera leve*/
+}
+
+/*--SECCIONES DE COLOR--*/
+/*Cada slider (Novedades, Preventas, Catálogo) tiene un color distinto. El selector :nth-of-type(n) aplica estilos dependiendo del orden en el que aparezca el .slider en el HTML.*/
+/*--Slider de Novedades--*/
+.slider:nth-of-type(1) {
+    background-color: var(--azul);
+}
+
+/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Novedades */
+.slider:nth-of-type(1) .slider-header h2,
+.slider:nth-of-type(1) p,
+.slider:nth-of-type(1) .card {
+    color: var(--blanco);
+}
+
+/*--Slider de Preventas--*/
+.slider:nth-of-type(2) {
+    background-color: var(--rojo);
+}
+
+/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Preventas */
+.slider:nth-of-type(2) .slider-header h2,
+.slider:nth-of-type(2) p,
+.slider:nth-of-type(2) .card {
+    color: var(--blanco);
+}
+
+/*--Slider de Catalogo--*/
+.slider:nth-of-type(3) {
+    background-color: var(--verde);
+}
+
+/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Catalogo */
+.slider:nth-of-type(3) .slider-header h2,
+.slider:nth-of-type(3) p,
+.slider:nth-of-type(3) .card {
+    color: var(--blanco);
+}
+
+/*--FORMULARIO--*/
+.formulario {
+    background-color: #1b1b1b;
+    width: min(60rem, 100%);
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.formulario legend {
+    color: var(--amarilloBoton);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.campo label {
+    display: block;
+    color: var(--blanco);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.input-text,
+textarea {
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/*--BOTONES ESPECÍFICOS--*/
+/* Estilos base para todos los botones */
+.boton {
+    display: inline-block;
+    padding: 0.9rem 1.6rem;
+    border-radius: 0.6rem;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+/* Botones rojos para "Novedades" y "Catalogo" con texto blanco */
+.boton.novedades,
+.boton.comprar {
+    background-color: var(--rojoBoton); /*Color rojo fuerte para el fondo de los botones*/
+    color: var(--blanco); /*Texto blanco dentro de los botones*/
+}
+
+/* Hover para los botones rojos (cuando se pone el cursor encima de los botones*/
+.boton.novedades:hover,
+.boton.comprar:hover {
+    background-color: var(--rojoBotonHover); /* tono más oscuro al poner encima el cursor, dando una vibra de estar siendo presionado */
+    transform: translateY(-2px); /* se eleva un poco el boton al ser "seleccionado" por el cursor */
+    box-shadow: 0 6px 14px rgba(163,15,15,0.35); /*sombra del boton al estar siendo seleccionado para dar efecto al mismo*/
+}
+
+/* Active para los botones rojos (cuando se da clic)*/
+.boton.novedades:active,
+.boton.comprar:active {
+    transform: translateY(0); /* El botón regresa a su posición normal */
+    filter: brightness(0.95); /* Reduce ligeramente el brillo (efecto de presionado) */
+}
+
+/* Enfoque (accessibility) para rojo */
+.boton.novedades:focus,
+.boton.comprar:focus {
+    outline: 3px solid rgba(204,20,20,0.25); /* Contorno rojo semitransparente cuando está enfocado con teclado */
+    outline-offset: 3px; /* Espacio entre el borde del botón y el contorno */
+}
+
+/* Botón amarillo mostaza para el apartado de "Preventas" con texto negro */
+.boton.preventa {
+    background-color: var(--amarilloBoton); /* amarillo mostaza */
+    color: var(--oscuro); /* texto negro */
+}
+
+/* Hover para boton amarillo mostaza de "Preventas" */
+.boton.preventa:hover {
+    background-color: var(--amarilloBotonHover); /* tono más oscuro al poner encima el cursor, dando una vibra de estar siendo presionado */
+    transform: translateY(-2px); /* se eleva un poco el boton al ser "seleccionado" por el cursor */
+    box-shadow: 0 6px 14px rgba(230,184,0,0.25); /*sombra del boton al estar siendo seleccionado para dar efecto al mismo*/
+}
+
+/* Active para boton amarillo mostaza (cuando se da clic)*/
+.boton.preventa:active {
+    transform: translateY(0); /* El botón regresa a su posición normal */
+    filter: brightness(0.98); /* Reduce ligeramente el brillo (efecto de presionado) */
+}
+
+/* Enfoque (accessibility) para  amarillo mostaza */
+.boton.preventa:focus {
+    outline: 3px solid rgba(0,0,0,0.18); /* Contorno negro semitransparente cuando está enfocado con teclado */
+    outline-offset: 3px; /* Espacio entre el borde del botón y el contorno */
+}
+
+/* Tamaños responsivos para dimensionar los botones al estar bajo cierta resolucion minima */
+@media (min-width: 768px) {
+    .boton {
+        padding: 1rem 2rem;
+        font-size: 1.6rem;
+    }
+}
+
+/*--MAPA--*/
+.mapa {
+    text-align: center;       /* centra texto e iframe */
+    margin: 2rem 0;
+}
+
+.mapa h2 {
+    font-size: 2rem;
+    color: var(--blanco);
+    margin-bottom: 1.5rem;
+}
+
+.mapa .contenedor-mapa iframe {
+    max-width: 100%; /* Evita que el iframe (el mapa) sobrepase el ancho del contenedor, haciéndolo responsivo */
+    border-radius: 10px;
+}
+
+/*--FOOTER--*/
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 1.4rem;
+    color: #ccc;
+}
+
+/*--------------------------------------------------------------------------------------------------------------*/
+.header-principal {
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.header-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--oscuro);
+    padding: 0 25px;
+    height: 60px;
+}
+
+/* Titulo centrado absoluto */
+.titulo {
+    position: static; /* quitar absolute */
+    transform: none;  /* quitar translate */
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* Span o subtitulo */
+.titulo span {
+    display: block;
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative; /* quita absolute si antes estaba */
+    justify-content: flex-end; /* lo alinea a la derecha */
+}
+
+.btn-login, .btn-logout {
+    padding: 0.9rem 2rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    cursor: pointer;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    text-decoration: none; /* quita subrayado */
+
+}
+
+/* Colores específicos */
+.btn-login {
+    background-color: var(--amarilloBoton);
+    color: var(--oscuro);
+}
+
+.btn-login:hover {
+    background-color: var(--amarilloBotonHover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(230,184,0,0.35);
+}
+
+.btn-logout {
+    background-color: var(--rojoBoton);
+    color: var(--blanco);
+}
+
+.btn-logout:hover {
+    background-color: var(--rojoBotonHover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(163,15,15,0.35);
+}
+
+.bienvenida {
+    display: block;        /* fuerza que ocupe toda la línea */
+    font-size: 1.6rem;     /* tamaño más pequeño que el título */
+    color: #ccc;           /* gris claro */
+    margin-top: 0.5rem;    /* separación del título */
+    text-align: center;    /* centrado */
+    font-weight: normal;   /* no negrita, si quieres */
+}
+
+
+/* ---BUSCADOR CENTRADO--- */
+.buscador {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.buscador input {
+    width: 50%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border: 2px solid #333;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.buscador input:focus {
+    border-color: #00aaff;
+    box-shadow: 0 0 5px #00aaff;
+}
+
+/* ---RESULTADOS DEL BUSCADOR--- */
+#resultados {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 5px;
+}
+
+#resultados div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#resultados div:hover {
+    background-color: #f5f5f5;
+}
+
+/* ---RESPONSIVE--- */
+@media (max-width: 768px) {
+    .header-superior {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .user-info {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .btn-login, .btn-logout {
+        width: 50%; 
+        padding: 0.9rem 0;
+        font-size: 1.4rem;
+        min-width: auto;
+    }
+
+
+    .buscador input {
+        width: 80%;
+    }
+
+    #resultados {
+        width: 80%;
+    }
+
+    .titulo {
+        text-align: center;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+body.login-page {
+    font-family: 'Krub', sans-serif;
+    background: radial-gradient(circle at top, #0b0b33 0%, #000010 80%);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 3rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    color: var(--amarilloBoton);
+}
+
+.login-container label {
+    display: block;
+    text-align: left;
+    margin: 1rem 0 0.5rem;
+    font-weight: bold;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: #1c1c1c;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.login-container input::placeholder {
+    color: #aaa;
+}
+
+.login-container button {
+    background-color: var(--rojoBoton);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: var(--rojoBotonHover);
+}
+
+.toggle-link {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    color: #00aaff;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.toggle-link:hover {
+    color: #66d0ff;
+}
+
+/*------------------------------------------------------------------*/
+.resultados-busqueda-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.resultado-item {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: box-shadow 0.2s;
+}
+
+.resultado-item:hover {
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+}
+
+.resultado-img img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.resultado-info {
+    margin-left: 15px;
+    flex: 1;
+}
+
+.resultado-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+}
+
+.resultado-info .descripcion {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.resultado-info .precio {
+    font-weight: bold;
+    color: #e53935;
+    margin-bottom: 5px;
+}
+
+.resultado-info .boton {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.resultado-info .boton:hover {
+    background-color: #0056b3;
+}
+
+.no-resultados {
+    padding: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+/*--------------------------------------------------------------------------*/
+.producto-detalle {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+.producto-img img {
+    width: 350px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.producto-info {
+    flex: 1;
+}
+
+.precio {
+    font-size: 1.8rem;
+    color: #d62828;
+    font-weight: bold;
+}
+
+.descripcion {
+    margin: 1.2rem 0;
+    line-height: 1.5;
+}
+
+.acciones {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-comprar, .btn-carrito {
+    padding: 0.9rem 1.6rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-comprar {
+    background-color: var(--amarilloBoton);
+    color: var(--oscuro);
+}
+
+.btn-comprar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(230, 15, 15, 0.3);
+}
+
+.btn-carrito {
+    background-color: var(--rojoBoton);
+    color: white;
+}
+
+.btn-carrito:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(163, 15, 15, 0.3);
+}
+
+/*---------------------------------------------------------------------------------*/
+.slider {
+    width: 100%;
+    overflow-x: auto; /* permite desplazamiento horizontal */
+    scroll-behavior: smooth;
+    white-space: nowrap; /* evita que las cards bajen de línea */
+    padding: 10px 0;
+}
+
+.slides {
+    display: inline-flex;
+    gap: 20px; /* separación entre las cards */
+    padding-left: 10px;
+}
+
+.card {
+    flex: 0 0 auto; /* evita que se ajusten al ancho del contenedor */
+    width: 220px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.card .precio {
+    color: #007bff;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.boton.novedades {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.boton.novedades:hover {
+    background-color: #0056b3;
+}
+
+/***_______________________________________________________*********/
+/*--------------------------------------------------------------------------------------------------*/
+/* SLIDER GENERAL */
+.slider {
+    margin: 0 auto;               /* quita margen externo */
+    max-width: 120rem;
+    border-radius: 1rem;
+    padding: 2rem 0;              /* solo padding vertical */
+    overflow-x: auto;             /* desplazamiento horizontal */
+    scroll-behavior: smooth;
+    white-space: nowrap;          /* evita que las cards bajen de línea */
+    background-color: transparent; /* el fondo lo da cada slider por color */
+}
+
+/* Contenedor interno de las cards */
+.slides {
+    display: inline-flex;
+    gap: 0;                       /* quita espacio extra entre cards */
+    padding-left: 0;               /* quita margen inicial */
+}
+
+/* CARDS */
+.card {
+    flex: 0 0 auto;
+    width: 220px;
+    background-color: transparent; /* fondo igual al slider */
+    border-radius: 10px;
+    box-shadow: none;             /* quita sombra externa */
+    margin: 0;                     /* quita margen externo */
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+/* Animación al pasar el cursor */
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Imagen de la card */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Título del juego */
+.card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: var(--blanco);
+}
+
+/* Precio */
+.card .precio {
+    color: #ffcc00; /* amarillo */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* BOTONES */
+.boton.novedades {        /* Comprar */
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 8px 16px;
+    background-color: var(--rojoBoton);
+    color: var(--blanco);
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.boton.novedades:hover {
+    background-color: var(--rojoBotonHover);
+}
+
+.boton.preventa {         /* Agregar al carrito */
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 8px 16px;
+    background-color: var(--amarilloBoton);
+    color: var(--oscuro);
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.boton.preventa:hover {
+    background-color: var(--amarilloBotonHover);
+}
+
+/* Colores de los sliders */
+.slider:nth-of-type(1) {
+    background-color: var(--azul);
+}
+.slider:nth-of-type(2) {
+    background-color: var(--rojo);
+}
+.slider:nth-of-type(3) {
+    background-color: var(--verde);
+}
+
+
+/*--SLIDER GENERAL--*/
+.slider {
+    margin: 4rem auto;
+    max-width: 120rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgb(0, 0, 0);
+}
+
+/* Contenedor de las tarjetas del slider */
+.slider-contenido {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    background-color: transparent; /* ¡CAMBIO CLAVE! Esto quita el fondo rojo de la línea */
+}
+
+/* ... (mantener el resto de tu personalización de scrollbar) ... */
+
+/*--TARJETAS: MODIFICADAS PARA FONDO BLANCO --*/
+.card {
+    min-width: 250px;
+    background-color: var(--blanco); /* Fondo blanco de la tarjeta */
+    color: var(--oscuro); /* Color de texto general oscuro para la tarjeta */
+    border-radius: 1rem;
+    text-align: center;
+    padding: 1rem;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra para que la card blanca destaque */
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+/* Imagen dentro de cada tarjeta */
+.card img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    background-color: var(--blanco); /* Fondo blanco alrededor de la imagen */
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #eee; /* Un pequeño borde para definir la imagen si el fondo es blanco */
+}
+
+/* Título del juego o producto, su tamaño y color */
+.card h3 {
+    font-size: 1.8rem;
+    color: var(--oscuro); /* Color oscuro para el título sobre fondo blanco */
+    white-space: normal; /* Permite que el texto del título se ajuste a varias líneas */
+    overflow: hidden; /* Oculta el texto que se desborda */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es demasiado largo */
+    max-height: 4.5rem; /* Limita la altura a 2-3 líneas para evitar desbordamientos */
+    line-height: 1.5rem;
+}
+
+/* El apartado del precio, su color, su tamaño y separacion y su fuente en negrita*/
+.precio {
+    color: var(--rojoBoton); /* ¡CAMBIO! Color rojo para que el precio se vea en el fondo blanco */
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+/*--SECCIONES DE COLOR--*/
+/* Cada slider (Novedades, Preventas, Catálogo) tiene un color distinto. */
+
+/*--Slider de Novedades: REGRESA EL AZUL --*/
+.slider:nth-of-type(1) {
+    background-color: var(--azul); /* ¡CAMBIO CLAVE! Restaurado a tu azul original */
+}
+
+/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Novedades */
+.slider:nth-of-type(1) .slider-header h2,
+.slider:nth-of-type(1) p {
+    color: var(--blanco);
+}
+
+/* El color de la .card ahora es blanco, por lo que su propio texto es oscuro,
+   pero el título del SLIDER y el párrafo descriptivo siguen siendo blancos */
+
+
+/*--Slider de Preventas--*/
+.slider:nth-of-type(2) {
+    background-color: var(--rojo); /* Este sigue siendo rojo */
+}
+
+/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Preventas */
+.slider:nth-of-type(2) .slider-header h2,
+.slider:nth-of-type(2) p,
+.slider:nth-of-type(2) .card {
+    color: var(--blanco); /* Mantener texto blanco para las tarjetas rojas */
+}
+/* Asegúrate que las cards de preventa también tengan fondo blanco para consistencia,
+   o si quieres que sean rojas, ajusta el color del texto de su card para que contraste */
+.slider:nth-of-type(2) .card {
+    background-color: var(--blanco); /* Fondo blanco para las cards en la sección de preventas */
+    color: var(--oscuro); /* Texto oscuro para contraste */
+}
+.slider:nth-of-type(2) .card h3,
+.slider:nth-of-type(2) .card .precio {
+    color: var(--oscuro); /* Asegurar que el título y precio sean oscuros en cards blancas */
+}
+.slider:nth-of-type(2) .card .precio {
+    color: var(--rojoBoton); /* Si prefieres el precio en rojo también aquí */
+}
+
+
+/*--Slider de Catalogo--*/
+.slider:nth-of-type(3) {
+    background-color: var(--verde);
+}
+
+/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Catalogo */
+.slider:nth-of-type(3) .slider-header h2,
+.slider:nth-of-type(3) p,
+.slider:nth-of-type(3) .card {
+    color: var(--blanco);
+}
+/* Asegúrate que las cards de catalogo también tengan fondo blanco para consistencia */
+.slider:nth-of-type(3) .card {
+    background-color: var(--blanco); /* Fondo blanco para las cards en la sección de catálogo */
+    color: var(--oscuro); /* Texto oscuro para contraste */
+}
+.slider:nth-of-type(3) .card h3,
+.slider:nth-of-type(3) .card .precio {
+    color: var(--oscuro); /* Asegurar que el título y precio sean oscuros en cards blancas */
+}
+.slider:nth-of-type(3) .card .precio {
+    color: var(--rojoBoton); /* Si prefieres el precio en rojo también aquí */
+}
+
+/* ... (mantener el resto de tu CSS para botones, formulario, mapa, footer, etc. sin cambios) ... */
+
+
+/* ------------- ESTILOS ADICIONALES PARA EL CÓDIGO PHP DE GENERACIÓN DE CARDS -------------- */
+/* Estos estilos son para los botones generados por tu PHP, para que se alineen mejor */
+.card .acciones {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 1rem; /* Espacio entre los botones */
+    margin-top: 1rem; /* Espacio arriba de los botones */
+}
+
+.card .acciones .btn-comprar,
+.card .acciones .btn-carrito {
+    /* Aquí puedes reutilizar tus clases existentes de botones,
+       pero si no encajan bien, puedes definir estilos específicos aquí */
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card .acciones .btn-comprar {
+    background-color: var(--amarilloBoton);
+    color: var(--oscuro);
+}
+.card .acciones .btn-comprar:hover {
+    background-color: var(--amarilloBotonHover);
+    transform: translateY(-2px);
+}
+
+.card .acciones .btn-carrito {
+    background-color: var(--rojoBoton);
+    color: var(--blanco);
+}
+.card .acciones .btn-carrito:hover {
+    background-color: var(--rojoBotonHover);
+    transform: translateY(-2px);
+}
