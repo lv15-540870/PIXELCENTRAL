@@ -12,6 +12,18 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preload" href="styles.css" as="style">
     <link href="styles.css" rel="stylesheet">
+
+    <!--TAREA JS SLIDER CON JQUERY-->
+    <script>
+    $(document).ready(function(){
+        $('.slider-contenido').slick({
+            infinite: true,
+            slidesToShow: 3,
+            autoplay: true,
+            autoplaySpeed: 2000
+        });
+    });
+    </script>
 </head>
 <body>
     <?php
@@ -44,6 +56,18 @@ if(isset($_SESSION['pdf_file'])){
             <input type="text" id="busqueda" placeholder="Busca tus juegos, consolas o accesorios favoritos...">
             <div id="resultados"></div>
         </div>
+        
+        <!-- TAREA JS LIBRE - ANIMACION BANNER -->
+        <script>
+        window.addEventListener("load", () => {
+            const banner = document.querySelector(".banner-texto h1");
+            banner.style.transition = "0.5s";
+            banner.style.transform = "scale(1.1)";
+            setTimeout(()=> banner.style.transform = "scale(1)", 800);
+        });
+        </script>
+
+
     </header>
     <!-- FIN ENCABEZADO -->
 
@@ -130,39 +154,94 @@ if(isset($_SESSION['pdf_file'])){
     <!--FIN APARTADO DE JUEGOS-->
     <!--INICIO SERVICIO AL CLIENTE-->
     <section id="formulario">
-            <h2> </h2>
-                <form class="formulario">
-                    <fieldset>
-                        <legend>¿Tienes dudas? ¡Contactanos enviandonos un correo!</legend>
+        <h2></h2>
+        <form id="formContacto" class="formulario" method="post" action="#" onsubmit="return validarFormulario()">
+            <fieldset>
+                <legend>¿Tienes dudas? ¡Contáctanos enviándonos un correo!</legend>
 
-                        <div class="contenedor-campos">
-                            <div class="campo">
-                                <label>Nombre</label>
-                                <input class="input-text" type="text" placeholder="Tu nombre completo">
-                            </div>
+                <div class="contenedor-campos">
 
-                            <div class="campo">
-                                <label>Teléfono</label>
-                                <input class="input-text" type="text" placeholder="Teléfono para contactarte">
-                            </div>
+                    <div class="campo">
+                        <label>Nombre</label>
+                        <input id="nombre" name="nombre" class="input-text" type="text" placeholder="Tu nombre completo">
+                        <small class="error"></small>
+                    </div>
 
-                            <div class="campo">
-                                <label>Correo Electronico</label>
-                                <input class="input-text" type="text" placeholder="El correo con el que te contactaremos">
-                            </div>
+                    <div class="campo">
+                        <label>Teléfono</label>
+                        <input id="telefono" name="telefono" class="input-text" type="text" placeholder="Teléfono para contactarte">
+                        <small class="error"></small>
+                    </div>
 
-                            <div class="campo">
-                                <label>Comentanos tu duda</label>
-                                <textarea class="input-text"></textarea>
-                            </div>
-                        </div> <!--.contenedor-campos-->    
-                        
-                        <div class="alinear-derecha flex">
-                            <input class="boton w-sm-100" type="submit" value="Enviar">
-                        </div>    
-                    </fieldset>
-                </form>
-        </section>
+                    <div class="campo">
+                        <label>Correo Electrónico</label>
+                        <input id="correo" name="correo" class="input-text" type="email" placeholder="El correo con el que te contactaremos">
+                        <small class="error"></small>
+                    </div>
+
+                    <div class="campo">
+                        <label>Coméntanos tu duda</label>
+                        <textarea id="mensaje" name="mensaje" class="input-text" maxlength="200"></textarea>
+                        <small class="error"></small>
+                        <p id="contador">0/200</p>
+                    </div>
+
+                </div> <!--.contenedor-campos-->    
+                
+                <div class="alinear-derecha flex">
+                    <input class="boton w-sm-100" type="submit" value="Enviar">
+                </div>    
+            </fieldset>
+        </form>
+    </section>
+
+    <script>
+    // VALIDACIÓN + DOM (3 usos): errores, limpieza, contador
+
+    function validarFormulario(){
+        const nombre = document.getElementById("nombre");
+        const telefono = document.getElementById("telefono");
+        const correo = document.getElementById("correo");
+        const mensaje = document.getElementById("mensaje");
+
+        let valido = true;
+
+        //Uso DOM #1: limpiar errores
+        document.querySelectorAll("#formContacto .error").forEach(el => el.textContent = "");
+
+        // Validación con regex
+        if(!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]{3,50}$/.test(nombre.value.trim())){
+            nombre.nextElementSibling.textContent = "Nombre inválido (solo letras, mínimo 3 chars).";
+            valido = false;
+        }
+
+        if(!/^\d{10}$/.test(telefono.value.trim())){
+            telefono.nextElementSibling.textContent = "Teléfono inválido (10 dígitos).";
+            valido = false;
+        }
+
+        if(!/^[\w\.\-]+@[\w\-]+\.[A-Za-z]{2,}$/.test(correo.value.trim())){
+            correo.nextElementSibling.textContent = "Correo inválido.";
+            valido = false;
+        }
+
+        if(mensaje.value.trim().length < 5){
+            mensaje.nextElementSibling.textContent = "Mensaje muy corto.";
+            valido = false;
+        }
+
+        return valido;
+    }
+
+    //Uso DOM #2 y #3: contador en vivo + evento input
+    const txtMensaje = document.getElementById("mensaje");
+    const contador = document.getElementById("contador");
+
+    txtMensaje.addEventListener("input", () => {
+        contador.textContent = txtMensaje.value.length + "/200";
+    });
+    </script>
+
         <!--FIN SERVICIO AL CLIENTE-->
     <footer class="footer">
         <p>Todos los derechos reservados. Luis Antonio Cuevas Ortiz Freelancer </p>
