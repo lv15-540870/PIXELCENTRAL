@@ -23,15 +23,24 @@ try {
     if ($resultados) {
         echo '<div class="resultados-busqueda-lista">';
         foreach ($resultados as $juego) {
+            $nombreLimpio = htmlspecialchars($juego['nombre']);
+            $descripcionCorta = htmlspecialchars(substr($juego['descripcion'], 0, 100));
+            $precioFormateado = number_format($juego['precio'], 2);
+            $imagenRuta = htmlspecialchars($juego['imagen']);
+            $idJuego = (int)$juego['id'];
+            
             echo '<div class="resultado-item">';
             echo '<div class="resultado-img">';
-            echo '<img src="img/' . htmlspecialchars($juego['imagen']) . '" alt="' . htmlspecialchars($juego['nombre']) . '">';
+            echo "<img src='img/{$imagenRuta}' alt='{$nombreLimpio}'>";
             echo '</div>';
             echo '<div class="resultado-info">';
-            echo '<h3>' . htmlspecialchars($juego['nombre']) . '</h3>';
-            echo '<p class="descripcion">' . htmlspecialchars(substr($juego['descripcion'], 0, 120)) . '...</p>';
-            echo '<p class="precio">$' . number_format($juego['precio'], 2) . ' MXN</p>';
-            echo '<a href="detalle.php?id=' . $juego['id'] . '" class="boton">Ver detalle</a>';
+            echo "<h3>{$nombreLimpio}</h3>";
+            echo "<p class='descripcion'>{$descripcionCorta}...</p>";
+            echo "<p class='precio'>\${$precioFormateado} MXN</p>";
+            
+            // CAMBIADO: Ahora redirige a producto.php en lugar de detalle.php
+            echo "<a href='producto.php?id={$idJuego}' class='boton comprar'>Ver detalle</a>";
+            
             echo '</div>';
             echo '</div>';
         }
@@ -40,6 +49,7 @@ try {
         echo '<p class="no-resultados">No se encontraron resultados para "<strong>' . htmlspecialchars($q) . '</strong>".</p>';
     }
 } catch (PDOException $e) {
-    echo "Error en la búsqueda: " . $e->getMessage();
+    echo '<p class="no-resultados" style="color: #ff6b6b;">Error en la búsqueda. Intenta nuevamente.</p>';
+    error_log("Error búsqueda: " . $e->getMessage());
 }
 ?>

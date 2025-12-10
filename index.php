@@ -7,36 +7,22 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Central</title>
-    <link rel="stylesheet" href="normalize.css" as="style">
     <link rel="stylesheet" href="normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="styles.css" as="style">
     <link href="styles.css" rel="stylesheet">
-
-    <!--TAREA JS SLIDER CON JQUERY-->
-    <script>
-    $(document).ready(function(){
-        $('.slider-contenido').slick({
-            infinite: true,
-            slidesToShow: 3,
-            autoplay: true,
-            autoplaySpeed: 2000
-        });
-    });
-    </script>
 </head>
 <body>
     <?php
-// Mostrar mensaje de compra exitosa y botón de descarga
-if(isset($_SESSION['pdf_file'])){
-    $pdf_file = $_SESSION['pdf_file'];
-    echo "<div style='text-align:center; margin:20px; padding:10px; border:1px solid #28a745; background:#d4edda; border-radius:5px;'>";
-    echo "<p style='color:#155724; font-weight:bold;'>Compra realizada con éxito.</p>";
-    echo "<a href='$pdf_file' target='_blank' style='padding:10px 20px; background:#28a745; color:#fff; text-decoration:none; border-radius:5px;'>Descargar Recibo PDF</a>";
-    echo "</div>";
-    unset($_SESSION['pdf_file']);
-}
-?>
+    // Mostrar mensaje de compra exitosa y botón de descarga
+    if(isset($_SESSION['pdf_file'])){
+        $pdf_file = $_SESSION['pdf_file'];
+        echo "<div style='text-align:center; margin:20px; padding:10px; border:1px solid #28a745; background:#d4edda; border-radius:5px;'>";
+        echo "<p style='color:#155724; font-weight:bold;'>Compra realizada con éxito.</p>";
+        echo "<a href='$pdf_file' target='_blank' style='padding:10px 20px; background:#28a745; color:#fff; text-decoration:none; border-radius:5px;'>Descargar Recibo PDF</a>";
+        echo "</div>";
+        unset($_SESSION['pdf_file']);
+    }
+    ?>
 
     <!-- INICIO ENCABEZADO -->
     <header>
@@ -56,18 +42,6 @@ if(isset($_SESSION['pdf_file'])){
             <input type="text" id="busqueda" placeholder="Busca tus juegos, consolas o accesorios favoritos...">
             <div id="resultados"></div>
         </div>
-        
-        <!-- TAREA JS LIBRE - ANIMACION BANNER -->
-        <script>
-        window.addEventListener("load", () => {
-            const banner = document.querySelector(".banner-texto h1");
-            banner.style.transition = "0.5s";
-            banner.style.transform = "scale(1.1)";
-            setTimeout(()=> banner.style.transform = "scale(1)", 800);
-        });
-        </script>
-
-
     </header>
     <!-- FIN ENCABEZADO -->
 
@@ -80,7 +54,7 @@ if(isset($_SESSION['pdf_file'])){
                 <a href="#catalogo">Nuestro Catálogo</a>
                 <a href="#ubicacion">Ubicación</a>
                 <a href="#formulario">Servicio Al Cliente</a>
-              <?php
+                <?php
                 if (isset($_SESSION['usuario'])) {
                     if ($_SESSION['usuario']['rol'] === 'admin') {
                         echo '<a href="inventario.php">Inventario</a>';
@@ -88,7 +62,7 @@ if(isset($_SESSION['pdf_file'])){
                         echo '<a href="carrito.php">Carrito</a>';
                     }
                 } else {
-                        echo '<a href="login.php">Carrito</a>';
+                    echo '<a href="login.php">Carrito</a>';
                 }
                 ?>
             </nav>
@@ -101,57 +75,63 @@ if(isset($_SESSION['pdf_file'])){
         </div>
     </header>
     <!-- FIN MENU -->
+
     <!--INICIO APARTADO VIDEOJUEGOS-->
     <main class="contenedor sombra">
         <!--INICIO NOVEDADES-->
         <section id="novedades" class="slider">
             <div class="slider-header">
-                    <h2> Novedades</h2>
-                    <p>Descubre los títulos más recientes que acaban de llegar a Pixel Central.</p>
+                <h2>Novedades</h2>
+                <p>Descubre los títulos más recientes que acaban de llegar a Pixel Central.</p>
             </div>
-                    <?php include 'cards_novedades.php'; ?>
-                </div>
-            </section>
-            <!--FIN NOVEDADES-->
-            <!--INICIO PREVENTAS-->
-            <section id="preventas" class="slider">
-                <div class="slider-header">
-                    <h2> Preventas </h2>
-                    <p>Reserva tus títulos favoritos antes de su lanzamiento y sé de los primeros en jugarlos.</p>
-                </div>
-                <div class="slider-contenido">
-                    <?php include 'cards_preventa.php'; ?>
-                </div>
-            </section>
-            <!--FIN PREVENTAS-->
-            <!--INICIO CATALOGO-->
-            <section id="catalogo" class="slider">
-                <div class="slider-header">
-                    <h2>Catálogo</h2>
-                    <p>Explora nuestros juegos disponibles para todas las consolas.</p>
-                </div>
-                <div class="slider-contenido">
-                    <?php include 'cards_catalogo.php'; ?>
-                </div>
-            </section>
-        </div>    
+            <div class="slider-contenido">
+                <?php include 'cards_novedades.php'; ?>
+            </div>
+        </section>
+        <!--FIN NOVEDADES-->
+
+        <!--INICIO PREVENTAS-->
+        <section id="preventas" class="slider">
+            <div class="slider-header">
+                <h2>Preventas</h2>
+                <p>Reserva tus títulos favoritos antes de su lanzamiento y sé de los primeros en jugarlos.</p>
+            </div>
+            <div class="slider-contenido">
+                <?php include 'cards_preventa.php'; ?>
+            </div>
+        </section>
+        <!--FIN PREVENTAS-->
+
+        <!--INICIO CATALOGO-->
+        <section id="catalogo" class="slider">
+            <div class="slider-header">
+                <h2>Catálogo</h2>
+                <p>Explora nuestros juegos disponibles para todas las consolas.</p>
+            </div>
+            <div class="slider-contenido">
+                <?php include 'cards_catalogo.php'; ?>
+            </div>
+        </section>
         <!--FIN CATALOGO-->
        
         <!--INICIO UBICACION-->
-        <section id="ubicacion" class="mapa"> <h2>¡Ubicanos en Plaza de la Tecnología Hidalgo #1334 poniente, Torreón, Mexico, en el local 322 en el segundo piso.</h2> <div class="contenedor-mapa" style="text-align:center; margin-top:20px;"> 
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2527.9559246028207!2d-103.46289904751433!3d25.536972806719735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1759757986514!5m2!1ses-419!2smx" 
-            width="600" 
-            height="450" 
-            style="border:0; border-radius:10px;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade"> 
-            </iframe> 
-            </div> 
-        </section> 
+        <section id="ubicacion" class="mapa">
+            <h2>¡Ubicanos en Plaza de la Tecnología Hidalgo #1334 poniente, Torreón, Mexico, en el local 322 en el segundo piso.</h2>
+            <div class="contenedor-mapa" style="text-align:center; margin-top:20px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2527.9559246028207!2d-103.46289904751433!3d25.536972806719735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1759757986514!5m2!1ses-419!2smx" 
+                    width="600" 
+                    height="450" 
+                    style="border:0; border-radius:10px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
         <!-- FIN UBICACION -->
-    </main> 
+    </main>
     <!--FIN APARTADO DE JUEGOS-->
+
     <!--INICIO SERVICIO AL CLIENTE-->
     <section id="formulario">
         <h2></h2>
@@ -160,7 +140,6 @@ if(isset($_SESSION['pdf_file'])){
                 <legend>¿Tienes dudas? ¡Contáctanos enviándonos un correo!</legend>
 
                 <div class="contenedor-campos">
-
                     <div class="campo">
                         <label>Nombre</label>
                         <input id="nombre" name="nombre" class="input-text" type="text" placeholder="Tu nombre completo">
@@ -185,19 +164,36 @@ if(isset($_SESSION['pdf_file'])){
                         <small class="error"></small>
                         <p id="contador">0/200</p>
                     </div>
-
-                </div> <!--.contenedor-campos-->    
+                </div>
                 
                 <div class="alinear-derecha flex">
                     <input class="boton w-sm-100" type="submit" value="Enviar">
-                </div>    
+                </div>
             </fieldset>
         </form>
     </section>
+    <!--FIN SERVICIO AL CLIENTE-->
 
+    <footer class="footer">
+        <p>Todos los derechos reservados. Luis Antonio Cuevas Ortiz Freelancer</p>
+    </footer>
+
+    <!-- SCRIPTS AL FINAL DEL BODY -->
+    
+    <!-- TAREA JS LIBRE - ANIMACION BANNER -->
     <script>
-    // VALIDACIÓN + DOM (3 usos): errores, limpieza, contador
+    window.addEventListener("load", () => {
+        const banner = document.querySelector(".banner-texto h1");
+        if(banner) {
+            banner.style.transition = "0.5s";
+            banner.style.transform = "scale(1.1)";
+            setTimeout(() => banner.style.transform = "scale(1)", 800);
+        }
+    });
+    </script>
 
+    <!-- VALIDACIÓN + DOM -->
+    <script>
     function validarFormulario(){
         const nombre = document.getElementById("nombre");
         const telefono = document.getElementById("telefono");
@@ -237,30 +233,60 @@ if(isset($_SESSION['pdf_file'])){
     const txtMensaje = document.getElementById("mensaje");
     const contador = document.getElementById("contador");
 
-    txtMensaje.addEventListener("input", () => {
-        contador.textContent = txtMensaje.value.length + "/200";
+    if(txtMensaje && contador) {
+        txtMensaje.addEventListener("input", () => {
+            contador.textContent = txtMensaje.value.length + "/200";
+        });
+    }
+    </script>
+
+    <!--BUSCADOR-->
+    <script>
+    document.getElementById("busqueda").addEventListener("keyup", function() {
+        let q = this.value.trim();
+        if (q.length > 0) {
+            fetch("buscar.php?q=" + encodeURIComponent(q))
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById("resultados").innerHTML = data;
+                });
+        } else {
+            document.getElementById("resultados").innerHTML = "";
+        }
     });
     </script>
 
-        <!--FIN SERVICIO AL CLIENTE-->
-    <footer class="footer">
-        <p>Todos los derechos reservados. Luis Antonio Cuevas Ortiz Freelancer </p>
-    </footer>
-    
-    <!--BUSCADOR-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.getElementById("busqueda").addEventListener("keyup", function() {
-        let q = this.value.trim();
-            if (q.length > 0) {
-                fetch("buscar.php?q=" + encodeURIComponent(q))
-                    .then(res => res.text())
-                    .then(data => {
-                        document.getElementById("resultados").innerHTML = data;
-                    });
-            } else {
-                document.getElementById("resultados").innerHTML = "";
+    $(document).ready(function(){
+        // Animación suave al hacer clic en los links del menú
+        $('.navegacion-principal a').on('click', function(e){
+            if(this.hash !== '') {
+                e.preventDefault();
+                const hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 80
+                }, 800);
             }
         });
+    });
+    </script>
+
+    <script>
+    // Cerrar resultados de búsqueda al hacer clic fuera
+    document.addEventListener('click', function(event) {
+        const buscador = document.querySelector('.buscador');
+        const resultados = document.getElementById('resultados');
+        
+        if (buscador && resultados && !buscador.contains(event.target)) {
+            resultados.innerHTML = '';
+        }
+    });
+
+    // Prevenir que se cierre al hacer clic dentro del buscador
+    document.querySelector('.buscador')?.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
     </script>
 </body>
 </html>

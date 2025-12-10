@@ -1,15 +1,15 @@
-:root { /*--COLORES A USAR EN NUESTRA PAGINA--*/
---blanco: #ffffff;
---azul: #0033cc;
---rojo: #cc0000;
---verde: #008f39;
---oscuro: #111;
---grisClaro: #222;
---rojoBoton: #cc1414;
---rojoBotonHover: #a30f0f;
---amarilloBoton: #ffcc00;
---amarilloBotonHover: #e6b800;
---colorSlider: #444;
+:root {
+    --blanco: #ffffff;
+    --azul: #0033cc;
+    --rojo: #cc0000;
+    --verde: #008f39;
+    --oscuro: #111;
+    --grisClaro: #222;
+    --rojoBoton: #cc1414;
+    --rojoBotonHover: #a30f0f;
+    --amarilloBoton: #ffcc00;
+    --amarilloBotonHover: #e6b800;
+    --colorSlider: #444;
 }
 
 /*--GLOBAL--*/
@@ -31,19 +31,97 @@ body {
     background: radial-gradient(circle at top, #0b0b33 0%, #000010 80%);
 }
 
+body.login-page {
+    font-family: 'Krub', sans-serif;
+    background: radial-gradient(circle at top, #0b0b33 0%, #000010 80%);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
 /*--HEADER--*/
+.header-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--oscuro);
+    padding: 0 25px;
+    height: 60px;
+}
+
 .titulo {
     text-align: center;
-    font-size: 3.5rem;
+    font-size: 2rem;
     margin-top: 1rem;
 }
 
 .titulo span {
     display: block;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     color: #ccc;
 }
 
+.bienvenida {
+    display: block;
+    font-size: 1.6rem;
+    color: #ccc;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-weight: normal;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    justify-content: flex-end;
+}
+
+.btn-login, 
+.btn-logout {
+    padding: 0.9rem 2rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    cursor: pointer;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    text-decoration: none;
+}
+
+.btn-login {
+    background-color: var(--amarilloBoton);
+    color: var(--oscuro);
+}
+
+.btn-login:hover {
+    background-color: var(--amarilloBotonHover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(230,184,0,0.35);
+}
+
+.btn-logout {
+    background-color: var(--rojoBoton);
+    color: var(--blanco);
+}
+
+.btn-logout:hover {
+    background-color: var(--rojoBotonHover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(163,15,15,0.35);
+}
+
+/*--NAVEGACIÓN--*/
 .navegacion-principal {
     display: flex;
     flex-wrap: wrap;
@@ -89,16 +167,61 @@ body {
     text-align: center;
 }
 
+/*--BUSCADOR--*/
+.buscador {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.buscador input {
+    width: 50%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border: 2px solid #333;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.buscador input:focus {
+    border-color: #00aaff;
+    box-shadow: 0 0 5px #00aaff;
+}
+
+#resultados {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 5px;
+}
+
+#resultados div {
+    padding: 10px;
+    cursor: pointer;
+    color: #333;
+}
+
+#resultados div:hover {
+    background-color: #f5f5f5;
+}
+
 /*--SLIDER GENERAL--*/
 .slider {
     margin: 4rem auto;
     max-width: 120rem;
     border-radius: 1rem;
     padding: 2rem;
-    box-shadow: 0 5px 20px rgb(0, 0, 0); /* Sombra para dar efecto de elevación */
+    box-shadow: 0 5px 20px rgb(0, 0, 0);
 }
 
-/*Centrado al texto que se encuentra dentro del encabezado*/
 .slider-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -106,7 +229,7 @@ body {
 
 .slider-header h2 {
     font-size: 2.8rem;
-    text-transform: uppercase; /*Convierte todo el texto en mayusculas*/
+    text-transform: uppercase;
     margin-bottom: 1rem;
 }
 
@@ -115,122 +238,219 @@ body {
     color: #f5f5f5;
 }
 
-/*Contenedor de las tarjetas del slider */
 .slider-contenido {
-    display: flex; /* Coloca las tarjetas una al lado de otra en fila lo que nos permite mostrar más titulos*/
+    display: flex;
     gap: 2rem;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory; /* Hace que el slider se mueva por el eje x de la pagina y se alinee por cada tarjeta */
+    scroll-snap-type: x mandatory;
     padding-bottom: 1rem;
+    white-space: nowrap;
 }
 
-/* Personalización de la barra de desplazamiento (solo visible en navegadores basados en WebKit como Chrome o Edge) */
 .slider-contenido::-webkit-scrollbar {
-    height: 8px; 
+    height: 8px;
+    background-color: transparent;
 }
 
-/* Estilizado de la parte móvil del scroll */
+.slider-contenido::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
 .slider-contenido::-webkit-scrollbar-thumb {
-    background-color: var(--colorSlider); /* Color gris oscuro del scroll */
+    background-color: var(--colorSlider);
     border-radius: 4px;
 }
 
 /*--TARJETAS--*/
 .card {
     min-width: 250px;
-    background-color: #1c1c1c;
+    max-width: 250px;
+    width: 250px;
+    background-color: transparent;
     color: var(--blanco);
     border-radius: 1rem;
     text-align: center;
     padding: 1rem;
-    flex: 0 0 auto;
-    scroll-snap-align: start; /* Hace que el scroll horizontal “encaje” al inicio de cada tarjeta */
-    transition: transform 0.3s ease; /* Suaviza la animación cuando cambia el tamaño al hacer hover */
+    flex: 0 0 250px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/*Al tener nuestro cursor encima de cada tarjeta sucedera una "animacion" de ser seleccionado*/
 .card:hover {
-    transform: scale(1.03); /* Aumenta ligeramente el tamaño (3%) al pasar el cursor */
+    transform: scale(1.03);
 }
 
-/* Imagen dentro de cada tarjeta */
 .card img {
     width: 100%;
     height: 230px;
-    object-fit: contain; /* Escala la imagen sin recortarla (mantiene todo visible) */
-    background-color: var(--oscuro); /*Si la imagen no abarca todo, se pone un fondo negro*/
+    object-fit: contain;
+    background-color: var(--blanco);
     border-radius: 1rem;
     margin-bottom: 1rem;
 }
 
-/* Título del juego o producto, su tamaño y color*/
 .card h3 {
     font-size: 1.8rem;
-    color: var(--blanco); 
+    color: var(--blanco);
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5rem;
+    line-height: 1.5rem;
 }
 
-/*El apartado del precio, su color, su tamaño y separacion y su fuente en negrita*/
 .precio {
-    color: #ffcc00;
+    color: var(--blanco);
     font-weight: bold;
     font-size: 1.6rem;
     margin-bottom: 1rem;
 }
 
+.card .acciones {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
 /*--BOTONES--*/
 .boton {
-    display: inline-block; /*Hace que el botón se comporte como un bloque en línea (permite ajustar ancho/alto)*/
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 0.5rem;
+    display: inline-block;
+    padding: 0.9rem 1.6rem;
+    border-radius: 0.6rem;
+    font-weight: 700;
     text-decoration: none;
-    font-weight: bold;
-    cursor: pointer; /*Cambia la flecha del cursor por una mano al estar encima del boton*/
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
 
-/*Efecto Hover del boton al tener el cursor encima de este*/
 .boton:hover {
-    filter: brightness(1.2); /*Animacion al seleccionar el boton con el cursor, aumentando el brillo de manera leve*/
+    filter: brightness(1.2);
 }
 
-/*--SECCIONES DE COLOR--*/
-/*Cada slider (Novedades, Preventas, Catálogo) tiene un color distinto. El selector :nth-of-type(n) aplica estilos dependiendo del orden en el que aparezca el .slider en el HTML.*/
-/*--Slider de Novedades--*/
-.slider:nth-of-type(1) {
+.boton.novedades,
+.boton.comprar {
+    background-color: var(--rojoBoton);
+    color: var(--blanco);
+}
+
+.boton.novedades:hover,
+.boton.comprar:hover {
+    background-color: var(--rojoBotonHover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(163,15,15,0.35);
+}
+
+.boton.novedades:active,
+.boton.comprar:active {
+    transform: translateY(0);
+    filter: brightness(0.95);
+}
+
+.boton.novedades:focus,
+.boton.comprar:focus {
+    outline: 3px solid rgba(204,20,20,0.25);
+    outline-offset: 3px;
+}
+
+.boton.preventa {
+    background-color: var(--amarilloBoton);
+    color: var(--oscuro);
+}
+
+.boton.preventa:hover {
+    background-color: var(--amarilloBotonHover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(230,184,0,0.25);
+}
+
+.boton.preventa:active {
+    transform: translateY(0);
+    filter: brightness(0.98);
+}
+
+.boton.preventa:focus {
+    outline: 3px solid rgba(0,0,0,0.18);
+    outline-offset: 3px;
+}
+
+.btn-comprar,
+.btn-carrito {
+    padding: 0.9rem 1.6rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-comprar {
+    background-color: var(--amarilloBoton);
+    color: var(--oscuro);
+}
+
+.btn-comprar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(230, 15, 15, 0.3);
+}
+
+.btn-carrito {
+    background-color: var(--rojoBoton);
+    color: white;
+}
+
+.btn-carrito:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(163, 15, 15, 0.3);
+}
+
+/*--SECCIONES DE COLOR CON IDs--*/
+#novedades.slider {
     background-color: var(--azul);
 }
 
-/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Novedades */
-.slider:nth-of-type(1) .slider-header h2,
-.slider:nth-of-type(1) p,
-.slider:nth-of-type(1) .card {
+#novedades .slider-header h2,
+#novedades .slider-header p {
     color: var(--blanco);
 }
 
-/*--Slider de Preventas--*/
-.slider:nth-of-type(2) {
+#novedades .card {
+    background-color: var(--azul);
+}
+
+#preventas.slider {
     background-color: var(--rojo);
 }
 
-/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Preventas */
-.slider:nth-of-type(2) .slider-header h2,
-.slider:nth-of-type(2) p,
-.slider:nth-of-type(2) .card {
+#preventas .slider-header h2,
+#preventas .slider-header p {
     color: var(--blanco);
 }
 
-/*--Slider de Catalogo--*/
-.slider:nth-of-type(3) {
+#preventas .card {
+    background-color: var(--rojo);
+}
+
+#catalogo.slider {
     background-color: var(--verde);
 }
 
-/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Catalogo */
-.slider:nth-of-type(3) .slider-header h2,
-.slider:nth-of-type(3) p,
-.slider:nth-of-type(3) .card {
+#catalogo .slider-header h2,
+#catalogo .slider-header p {
     color: var(--blanco);
+}
+
+#catalogo .card {
+    background-color: var(--verde);
 }
 
 /*--FORMULARIO--*/
@@ -265,289 +485,7 @@ textarea {
     margin-bottom: 1rem;
 }
 
-/*--BOTONES ESPECÍFICOS--*/
-/* Estilos base para todos los botones */
-.boton {
-    display: inline-block;
-    padding: 0.9rem 1.6rem;
-    border-radius: 0.6rem;
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
-}
-
-/* Botones rojos para "Novedades" y "Catalogo" con texto blanco */
-.boton.novedades,
-.boton.comprar {
-    background-color: var(--rojoBoton); /*Color rojo fuerte para el fondo de los botones*/
-    color: var(--blanco); /*Texto blanco dentro de los botones*/
-}
-
-/* Hover para los botones rojos (cuando se pone el cursor encima de los botones*/
-.boton.novedades:hover,
-.boton.comprar:hover {
-    background-color: var(--rojoBotonHover); /* tono más oscuro al poner encima el cursor, dando una vibra de estar siendo presionado */
-    transform: translateY(-2px); /* se eleva un poco el boton al ser "seleccionado" por el cursor */
-    box-shadow: 0 6px 14px rgba(163,15,15,0.35); /*sombra del boton al estar siendo seleccionado para dar efecto al mismo*/
-}
-
-/* Active para los botones rojos (cuando se da clic)*/
-.boton.novedades:active,
-.boton.comprar:active {
-    transform: translateY(0); /* El botón regresa a su posición normal */
-    filter: brightness(0.95); /* Reduce ligeramente el brillo (efecto de presionado) */
-}
-
-/* Enfoque (accessibility) para rojo */
-.boton.novedades:focus,
-.boton.comprar:focus {
-    outline: 3px solid rgba(204,20,20,0.25); /* Contorno rojo semitransparente cuando está enfocado con teclado */
-    outline-offset: 3px; /* Espacio entre el borde del botón y el contorno */
-}
-
-/* Botón amarillo mostaza para el apartado de "Preventas" con texto negro */
-.boton.preventa {
-    background-color: var(--amarilloBoton); /* amarillo mostaza */
-    color: var(--oscuro); /* texto negro */
-}
-
-/* Hover para boton amarillo mostaza de "Preventas" */
-.boton.preventa:hover {
-    background-color: var(--amarilloBotonHover); /* tono más oscuro al poner encima el cursor, dando una vibra de estar siendo presionado */
-    transform: translateY(-2px); /* se eleva un poco el boton al ser "seleccionado" por el cursor */
-    box-shadow: 0 6px 14px rgba(230,184,0,0.25); /*sombra del boton al estar siendo seleccionado para dar efecto al mismo*/
-}
-
-/* Active para boton amarillo mostaza (cuando se da clic)*/
-.boton.preventa:active {
-    transform: translateY(0); /* El botón regresa a su posición normal */
-    filter: brightness(0.98); /* Reduce ligeramente el brillo (efecto de presionado) */
-}
-
-/* Enfoque (accessibility) para  amarillo mostaza */
-.boton.preventa:focus {
-    outline: 3px solid rgba(0,0,0,0.18); /* Contorno negro semitransparente cuando está enfocado con teclado */
-    outline-offset: 3px; /* Espacio entre el borde del botón y el contorno */
-}
-
-/* Tamaños responsivos para dimensionar los botones al estar bajo cierta resolucion minima */
-@media (min-width: 768px) {
-    .boton {
-        padding: 1rem 2rem;
-        font-size: 1.6rem;
-    }
-}
-
-/*--MAPA--*/
-.mapa {
-    text-align: center;       /* centra texto e iframe */
-    margin: 2rem 0;
-}
-
-.mapa h2 {
-    font-size: 2rem;
-    color: var(--blanco);
-    margin-bottom: 1.5rem;
-}
-
-.mapa .contenedor-mapa iframe {
-    max-width: 100%; /* Evita que el iframe (el mapa) sobrepase el ancho del contenedor, haciéndolo responsivo */
-    border-radius: 10px;
-}
-
-/*--FOOTER--*/
-.footer {
-    text-align: center;
-    padding: 2rem 0;
-    font-size: 1.4rem;
-    color: #ccc;
-}
-
-/*--------------------------------------------------------------------------------------------------------------*/
-.header-principal {
-    padding: 20px;
-    background-color: #f0f0f0;
-}
-
-.header-superior {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--oscuro);
-    padding: 0 25px;
-    height: 60px;
-}
-
-/* Titulo centrado absoluto */
-.titulo {
-    position: static; /* quitar absolute */
-    transform: none;  /* quitar translate */
-    text-align: center;
-    font-size: 2rem;
-}
-
-/* Span o subtitulo */
-.titulo span {
-    display: block;
-    font-size: 1.2rem;
-    color: #ccc;
-}
-
-.user-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative; /* quita absolute si antes estaba */
-    justify-content: flex-end; /* lo alinea a la derecha */
-}
-
-.btn-login, .btn-logout {
-    padding: 0.9rem 2rem;
-    border-radius: 2rem;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    line-height: 1.2;
-    cursor: pointer;
-    min-width: 120px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
-    text-decoration: none; /* quita subrayado */
-
-}
-
-/* Colores específicos */
-.btn-login {
-    background-color: var(--amarilloBoton);
-    color: var(--oscuro);
-}
-
-.btn-login:hover {
-    background-color: var(--amarilloBotonHover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(230,184,0,0.35);
-}
-
-.btn-logout {
-    background-color: var(--rojoBoton);
-    color: var(--blanco);
-}
-
-.btn-logout:hover {
-    background-color: var(--rojoBotonHover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(163,15,15,0.35);
-}
-
-.bienvenida {
-    display: block;        /* fuerza que ocupe toda la línea */
-    font-size: 1.6rem;     /* tamaño más pequeño que el título */
-    color: #ccc;           /* gris claro */
-    margin-top: 0.5rem;    /* separación del título */
-    text-align: center;    /* centrado */
-    font-weight: normal;   /* no negrita, si quieres */
-}
-
-
-/* ---BUSCADOR CENTRADO--- */
-.buscador {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.buscador input {
-    width: 50%;
-    max-width: 400px;
-    padding: 10px 15px;
-    border: 2px solid #333;
-    border-radius: 25px;
-    font-size: 1rem;
-    outline: none;
-}
-
-.buscador input:focus {
-    border-color: #00aaff;
-    box-shadow: 0 0 5px #00aaff;
-}
-
-/* ---RESULTADOS DEL BUSCADOR--- */
-#resultados {
-    position: absolute;
-    background: white;
-    border: 1px solid #ccc;
-    width: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    max-height: 250px;
-    overflow-y: auto;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-top: 5px;
-}
-
-#resultados div {
-    padding: 10px;
-    cursor: pointer;
-}
-
-#resultados div:hover {
-    background-color: #f5f5f5;
-}
-
-/* ---RESPONSIVE--- */
-@media (max-width: 768px) {
-    .header-superior {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-
-    .user-info {
-        justify-content: center;
-        width: 100%;
-    }
-    
-    .btn-login, .btn-logout {
-        width: 50%; 
-        padding: 0.9rem 0;
-        font-size: 1.4rem;
-        min-width: auto;
-    }
-
-
-    .buscador input {
-        width: 80%;
-    }
-
-    #resultados {
-        width: 80%;
-    }
-
-    .titulo {
-        text-align: center;
-    }
-}
-
-/*-------------------------------------------------------------------------------------------------------------------------------------------*/
-body.login-page {
-    font-family: 'Krub', sans-serif;
-    background: radial-gradient(circle at top, #0b0b33 0%, #000010 80%);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
+/*--LOGIN--*/
 .login-container {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 3rem 2.5rem;
@@ -615,77 +553,158 @@ body.login-page {
     color: #66d0ff;
 }
 
-/*------------------------------------------------------------------*/
+/*--RESULTADOS DE BÚSQUEDA--*/
+#resultados {
+    position: absolute;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    max-height: 450px;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    margin-top: 5px;
+}
+
 .resultados-busqueda-lista {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 10px;
+    padding: 15px;
 }
 
 .resultado-item {
     display: flex;
     align-items: flex-start;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 6px;
-    background-color: #fff;
-    transition: box-shadow 0.2s;
+    gap: 15px;
+    border: 2px solid #444;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #2a2a2a;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .resultado-item:hover {
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+    background-color: #1f1f1f; /* Más oscuro en hover */
+    border-color: #ffcc00; /* Borde amarillo */
+    box-shadow: 0px 4px 16px rgba(255, 204, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+.resultado-img {
+    flex-shrink: 0;
 }
 
 .resultado-img img {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 6px;
+    background-color: white;
+    transition: transform 0.3s ease;
+}
+
+.resultado-item:hover .resultado-img img {
+    transform: scale(1.05);
 }
 
 .resultado-info {
-    margin-left: 15px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .resultado-info h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.1rem;
+    margin: 0;
+    font-size: 1.6rem;
+    color: #ffffff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.resultado-item:hover .resultado-info h3 {
+    color: #ffcc00; /* Título amarillo en hover */
 }
 
 .resultado-info .descripcion {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 5px;
+    font-size: 1.3rem;
+    color: #cccccc;
+    line-height: 1.4;
+    margin: 0;
 }
 
 .resultado-info .precio {
+    font-size: 1.8rem;
+    color: #4CAF50;
     font-weight: bold;
-    color: #e53935;
-    margin-bottom: 5px;
+    margin: 5px 0;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
 }
 
 .resultado-info .boton {
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.9rem;
+    align-self: flex-start;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
 }
 
-.resultado-info .boton:hover {
-    background-color: #0056b3;
+.resultado-item:hover .boton {
+    transform: scale(1.05);
 }
 
 .no-resultados {
-    padding: 10px;
+    padding: 20px;
+    text-align: center;
     font-style: italic;
-    color: #555;
+    color: #999;
+    font-size: 1.4rem;
 }
 
-/*--------------------------------------------------------------------------*/
+/* Scrollbar personalizada */
+#resultados::-webkit-scrollbar {
+    width: 8px;
+}
+
+#resultados::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+#resultados::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+#resultados::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #resultados {
+        width: 90%;
+    }
+
+    .resultado-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .resultado-img img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .resultado-info .boton {
+        align-self: center;
+    }
+}
+
+/*--DETALLE DE PRODUCTO--*/
 .producto-detalle {
     display: flex;
     gap: 2rem;
@@ -707,392 +726,94 @@ body.login-page {
     flex: 1;
 }
 
-.precio {
-    font-size: 1.8rem;
-    color: #d62828;
-    font-weight: bold;
-}
-
-.descripcion {
-    margin: 1.2rem 0;
-    line-height: 1.5;
-}
-
 .acciones {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
 }
 
-.btn-comprar, .btn-carrito {
-    padding: 0.9rem 1.6rem;
-    border-radius: 2rem;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+/*--MAPA--*/
+.mapa {
+    text-align: center;
+    margin: 2rem 0;
 }
 
-.btn-comprar {
-    background-color: var(--amarilloBoton);
-    color: var(--oscuro);
+.mapa h2 {
+    font-size: 2rem;
+    color: var(--blanco);
+    margin-bottom: 1.5rem;
 }
 
-.btn-comprar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(230, 15, 15, 0.3);
-}
-
-.btn-carrito {
-    background-color: var(--rojoBoton);
-    color: white;
-}
-
-.btn-carrito:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(163, 15, 15, 0.3);
-}
-
-/*---------------------------------------------------------------------------------*/
-.slider {
-    width: 100%;
-    overflow-x: auto; /* permite desplazamiento horizontal */
-    scroll-behavior: smooth;
-    white-space: nowrap; /* evita que las cards bajen de línea */
-    padding: 10px 0;
-}
-
-.slides {
-    display: inline-flex;
-    gap: 20px; /* separación entre las cards */
-    padding-left: 10px;
-}
-
-.card {
-    flex: 0 0 auto; /* evita que se ajusten al ancho del contenedor */
-    width: 220px;
-    background-color: transparent;
+.mapa .contenedor-mapa iframe {
+    max-width: 100%;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/*--FOOTER--*/
+.footer {
     text-align: center;
-    transition: transform 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-}
-
-.card h3 {
-    margin: 10px 0 5px;
-    font-size: 18px;
-    color: #333;
-}
-
-.card .precio {
-    color: #007bff;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.boton.novedades {
-    display: inline-block;
-    margin-bottom: 10px;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-}
-
-.boton.novedades:hover {
-    background-color: #0056b3;
-}
-
-/***_______________________________________________________*********/
-/*--------------------------------------------------------------------------------------------------*/
-/* SLIDER GENERAL */
-.slider {
-    margin: 0 auto;               /* quita margen externo */
-    max-width: 120rem;
-    border-radius: 1rem;
-    padding: 2rem 0;              /* solo padding vertical */
-    overflow-x: auto;             /* desplazamiento horizontal */
-    scroll-behavior: smooth;
-    white-space: nowrap;          /* evita que las cards bajen de línea */
-    background-color: transparent; /* el fondo lo da cada slider por color */
-}
-
-/* Contenedor interno de las cards */
-.slides {
-    display: inline-flex;
-    gap: 0;                       /* quita espacio extra entre cards */
-    padding-left: 0;               /* quita margen inicial */
-}
-
-/* CARDS */
-.card {
-    flex: 0 0 auto;
-    width: 220px;
-    background-color: transparent; /* fondo igual al slider */
-    border-radius: 10px;
-    box-shadow: none;             /* quita sombra externa */
-    margin: 0;                     /* quita margen externo */
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-/* Animación al pasar el cursor */
-.card:hover {
-    transform: scale(1.05);
-}
-
-/* Imagen de la card */
-.card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-}
-
-/* Título del juego */
-.card h3 {
-    margin: 10px 0 5px;
-    font-size: 18px;
-    color: var(--blanco);
-}
-
-/* Precio */
-.card .precio {
-    color: #ffcc00; /* amarillo */
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-/* BOTONES */
-.boton.novedades {        /* Comprar */
-    display: inline-block;
-    margin-bottom: 5px;
-    padding: 8px 16px;
-    background-color: var(--rojoBoton);
-    color: var(--blanco);
-    border-radius: 8px;
-    text-decoration: none;
-}
-
-.boton.novedades:hover {
-    background-color: var(--rojoBotonHover);
-}
-
-.boton.preventa {         /* Agregar al carrito */
-    display: inline-block;
-    margin-bottom: 5px;
-    padding: 8px 16px;
-    background-color: var(--amarilloBoton);
-    color: var(--oscuro);
-    border-radius: 8px;
-    text-decoration: none;
-}
-
-.boton.preventa:hover {
-    background-color: var(--amarilloBotonHover);
-}
-
-/* Colores de los sliders */
-.slider:nth-of-type(1) {
-    background-color: var(--azul);
-}
-.slider:nth-of-type(2) {
-    background-color: var(--rojo);
-}
-.slider:nth-of-type(3) {
-    background-color: var(--verde);
-}
-
-
-/*--SLIDER GENERAL--*/
-.slider {
-    margin: 4rem auto;
-    max-width: 120rem;
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 0 5px 20px rgb(0, 0, 0);
-}
-
-/* Contenedor de las tarjetas del slider */
-.slider-contenido {
-    display: flex;
-    gap: 2rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 1rem;
-    background-color: transparent; /* ¡CAMBIO CLAVE! Esto quita el fondo rojo de la línea */
-}
-
-/* ... (mantener el resto de tu personalización de scrollbar) ... */
-
-/*--TARJETAS: MODIFICADAS PARA FONDO BLANCO --*/
-.card {
-    min-width: 250px;
-    background-color: var(--blanco); /* Fondo blanco de la tarjeta */
-    color: var(--oscuro); /* Color de texto general oscuro para la tarjeta */
-    border-radius: 1rem;
-    text-align: center;
-    padding: 1rem;
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra para que la card blanca destaque */
-}
-
-.card:hover {
-    transform: scale(1.03);
-}
-
-/* Imagen dentro de cada tarjeta */
-.card img {
-    width: 100%;
-    height: 230px;
-    object-fit: contain;
-    background-color: var(--blanco); /* Fondo blanco alrededor de la imagen */
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid #eee; /* Un pequeño borde para definir la imagen si el fondo es blanco */
-}
-
-/* Título del juego o producto, su tamaño y color */
-.card h3 {
-    font-size: 1.8rem;
-    color: var(--oscuro); /* Color oscuro para el título sobre fondo blanco */
-    white-space: normal; /* Permite que el texto del título se ajuste a varias líneas */
-    overflow: hidden; /* Oculta el texto que se desborda */
-    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es demasiado largo */
-    max-height: 4.5rem; /* Limita la altura a 2-3 líneas para evitar desbordamientos */
-    line-height: 1.5rem;
-}
-
-/* El apartado del precio, su color, su tamaño y separacion y su fuente en negrita*/
-.precio {
-    color: var(--rojoBoton); /* ¡CAMBIO! Color rojo para que el precio se vea en el fondo blanco */
-    font-weight: bold;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-}
-
-/*--SECCIONES DE COLOR--*/
-/* Cada slider (Novedades, Preventas, Catálogo) tiene un color distinto. */
-
-/*--Slider de Novedades: REGRESA EL AZUL --*/
-.slider:nth-of-type(1) {
-    background-color: var(--azul); /* ¡CAMBIO CLAVE! Restaurado a tu azul original */
-}
-
-/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Novedades */
-.slider:nth-of-type(1) .slider-header h2,
-.slider:nth-of-type(1) p {
-    color: var(--blanco);
-}
-
-/* El color de la .card ahora es blanco, por lo que su propio texto es oscuro,
-   pero el título del SLIDER y el párrafo descriptivo siguen siendo blancos */
-
-
-/*--Slider de Preventas--*/
-.slider:nth-of-type(2) {
-    background-color: var(--rojo); /* Este sigue siendo rojo */
-}
-
-/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Preventas */
-.slider:nth-of-type(2) .slider-header h2,
-.slider:nth-of-type(2) p,
-.slider:nth-of-type(2) .card {
-    color: var(--blanco); /* Mantener texto blanco para las tarjetas rojas */
-}
-/* Asegúrate que las cards de preventa también tengan fondo blanco para consistencia,
-   o si quieres que sean rojas, ajusta el color del texto de su card para que contraste */
-.slider:nth-of-type(2) .card {
-    background-color: var(--blanco); /* Fondo blanco para las cards en la sección de preventas */
-    color: var(--oscuro); /* Texto oscuro para contraste */
-}
-.slider:nth-of-type(2) .card h3,
-.slider:nth-of-type(2) .card .precio {
-    color: var(--oscuro); /* Asegurar que el título y precio sean oscuros en cards blancas */
-}
-.slider:nth-of-type(2) .card .precio {
-    color: var(--rojoBoton); /* Si prefieres el precio en rojo también aquí */
-}
-
-
-/*--Slider de Catalogo--*/
-.slider:nth-of-type(3) {
-    background-color: var(--verde);
-}
-
-/* Aplica texto blanco a encabezados, párrafos y tarjetas dentro de Catalogo */
-.slider:nth-of-type(3) .slider-header h2,
-.slider:nth-of-type(3) p,
-.slider:nth-of-type(3) .card {
-    color: var(--blanco);
-}
-/* Asegúrate que las cards de catalogo también tengan fondo blanco para consistencia */
-.slider:nth-of-type(3) .card {
-    background-color: var(--blanco); /* Fondo blanco para las cards en la sección de catálogo */
-    color: var(--oscuro); /* Texto oscuro para contraste */
-}
-.slider:nth-of-type(3) .card h3,
-.slider:nth-of-type(3) .card .precio {
-    color: var(--oscuro); /* Asegurar que el título y precio sean oscuros en cards blancas */
-}
-.slider:nth-of-type(3) .card .precio {
-    color: var(--rojoBoton); /* Si prefieres el precio en rojo también aquí */
-}
-
-/* ... (mantener el resto de tu CSS para botones, formulario, mapa, footer, etc. sin cambios) ... */
-
-
-/* ------------- ESTILOS ADICIONALES PARA EL CÓDIGO PHP DE GENERACIÓN DE CARDS -------------- */
-/* Estos estilos son para los botones generados por tu PHP, para que se alineen mejor */
-.card .acciones {
-    display: flex;
-    justify-content: center; /* Centra los botones */
-    gap: 1rem; /* Espacio entre los botones */
-    margin-top: 1rem; /* Espacio arriba de los botones */
-}
-
-.card .acciones .btn-comprar,
-.card .acciones .btn-carrito {
-    /* Aquí puedes reutilizar tus clases existentes de botones,
-       pero si no encajan bien, puedes definir estilos específicos aquí */
-    padding: 0.8rem 1.5rem;
-    border-radius: 0.5rem;
+    padding: 2rem 0;
     font-size: 1.4rem;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #ccc;
 }
 
-.card .acciones .btn-comprar {
-    background-color: var(--amarilloBoton);
-    color: var(--oscuro);
-}
-.card .acciones .btn-comprar:hover {
-    background-color: var(--amarilloBotonHover);
-    transform: translateY(-2px);
+/*--RESPONSIVE--*/
+@media (min-width: 768px) {
+    .boton {
+        padding: 1rem 2rem;
+        font-size: 1.6rem;
+    }
 }
 
-.card .acciones .btn-carrito {
-    background-color: var(--rojoBoton);
-    color: var(--blanco);
+@media (max-width: 768px) {
+    .header-superior {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .titulo {
+        font-size: 1.6rem;
+        margin: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .titulo span {
+        font-size: 1rem;
+    }
+
+    .user-area {
+        width: 100%;
+        justify-content: flex-end;
+        padding-right: 0;
+    }
+
+    .bienvenida {
+        font-size: 1.2rem;
+        margin-right: auto;
+    }
+
+    .btn-login, 
+    .btn-logout {
+        padding: 0.7rem 1.5rem;
+        font-size: 1.2rem;
+        min-width: auto;
+        white-space: nowrap;
+    }
+
+    .buscador {
+        margin-top: 1rem;
+        padding: 0 1rem;
+    }
+
+    .buscador input {
+        width: 90%;
+    }
+
+    #resultados {
+        width: 90%;
+    }
 }
-.card .acciones .btn-carrito:hover {
-    background-color: var(--rojoBotonHover);
-    transform: translateY(-2px);
-}
+
